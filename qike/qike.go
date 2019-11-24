@@ -6,9 +6,12 @@ import (
 	"os"
 	"strconv"
 )
+//起课后形成的三个落宫
 var yi_gong = make(chan string, 70)
 var er_gong  =make(chan string, 70)
 var san_gong  = make(chan string ,70)
+//童子命
+var tong_zi = make(chan string,70)
 //起课部分
 
 func GetInPut() string {
@@ -146,6 +149,10 @@ func JieGua(yg uint,eg uint,sg uint,ri uint,yue uint) {
 		fmt.Println("三宫:留连")
 		san_gong <- "留连"
 		defer close(san_gong)
+		//童男童女
+		//TongZiMing()
+/*		tong_zi <- "此为童子命"
+		defer close(tong_zi)*/ //死锁
 	}
 	if (sg==GongWei[0]+2 || sg== GongWei[1]+2 || sg== GongWei[2]+2	|| sg== GongWei[3]+2|| sg== GongWei[4]+2 || sg== GongWei[5]+2 || sg== GongWei[6]+2)	{
 		fmt.Println("三宫:速喜")
@@ -168,7 +175,7 @@ func JieGua(yg uint,eg uint,sg uint,ri uint,yue uint) {
 		defer close(san_gong)
 	}
 	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-	fmt.Println("马前论命分百般，六壬推卦说一番")
+	fmt.Println("金口定-->马前论命分百般，六壬推卦说一番")
 	jin_kou_ding() //金口定
 	fmt.Println("百句金口暂活用，人生自古无十全，月缺尚须等月圆，请君续观小透玄")
 	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
@@ -178,4 +185,7 @@ func JieGua(yg uint,eg uint,sg uint,ri uint,yue uint) {
 	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 	YiDaoZhan(yg, eg,sg,ri ) //一刀斩
 	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+	TongZiMing(sg)
+	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+
 }

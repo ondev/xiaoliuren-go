@@ -7,8 +7,6 @@ import (
 	"strings"
 )
 
-//一刀斩内容　一刀斩以日论命
-
 //十二属相宫位
 func ShuXiang() string{
 	fmt.Println("\n输入你的属相(汉字或者全拼)")

@@ -5,10 +5,7 @@ import (
 )
 
 func main()  {
-	//qike.ShuXiang()
 	qike.QiKe()
-	//qike.JinKouLing()
-
-	//qike.Loop_luo_gong()
-
+	qike.About()
 }
+
