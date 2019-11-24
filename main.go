@@ -4,8 +4,7 @@ import (
 	"mingfajuan/qike"
 )
 
-func main()  {
+func main() {
 	qike.QiKe()
 	qike.About()
 }
-

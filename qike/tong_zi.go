@@ -18,23 +18,24 @@ type Time struct {
 	辰戌时 string
 	巳亥时 string
 }
+
 //get number
-func GetNumber() int{
+func GetNumber() int {
 	fmt.Println("\n如果你看到了这里的内容说明落宫应童子命 输入出生时辰对应数字查看更多内容")
 	fmt.Println("十二时辰数字参考上文提示")
 	input := bufio.NewScanner(os.Stdin)
 	input.Scan()
 	input.Text()
-	number,err := strconv.Atoi(input.Text())
-	if err!=nil{
+	number, err := strconv.Atoi(input.Text())
+	if err != nil {
 		fmt.Println(err)
 	}
 	return number
 }
 func TongZiMing(sg uint) {
 
-	GongWei:= [8]uint{1,7,13,19,25,31,37,43}
-	if (sg==GongWei[0]+1 || sg== GongWei[1]+1 || sg== GongWei[2]+1	|| sg== GongWei[3]+1|| sg== GongWei[4]+1 || sg== GongWei[5]+1 || sg== GongWei[6]+1)	{
+	GongWei := [8]uint{1, 7, 13, 19, 25, 31, 37, 43}
+	if sg == GongWei[0]+1 || sg == GongWei[1]+1 || sg == GongWei[2]+1 || sg == GongWei[3]+1 || sg == GongWei[4]+1 || sg == GongWei[5]+1 || sg == GongWei[6]+1 {
 		fmt.Println("三宫-->留连")
 
 		number := GetNumber()
@@ -77,11 +78,11 @@ func TongZiMing(sg uint) {
 	}
 }
 
-func About()  {
-	time.Sleep(time.Second*9)
-	fmt.Println("					六壬通神暄未然\n"+
-		"					因缘造化系自身\n"+
-		"					阴阳共判劝君明\n"+
+func About() {
+	time.Sleep(time.Second * 9)
+	fmt.Println("					六壬通神暄未然\n" +
+		"					因缘造化系自身\n" +
+		"					阴阳共判劝君明\n" +
 		"					虚实明辨壬中求\n")
 	fmt.Println("						/by liangzi")
 	fmt.Println("						mail: bGlhbmd6aTEyMTZAb3V0bG9vay5jb20K")
