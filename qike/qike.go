@@ -6,7 +6,9 @@ import (
 	"os"
 	"strconv"
 )
-
+var yi_gong = make(chan string, 70)
+var er_gong  =make(chan string, 70)
+var san_gong  = make(chan string ,70)
 //起课部分
 
 func GetInPut() string {
@@ -42,94 +44,135 @@ func QiKe(){
 //	fmt.Println("yigong = ", YiGong)
 	if ri > 6 {
 		ErGong := YiGong + ri - 7
-		fmt.Println("ri >6 =",ri)
+		//fmt.Println("ri >6 =",ri)
 		if shi > 6 {
 			SanGong := ErGong + shi- 7
 			//fmt.Println("sangong >6(shi >6) ", SanGong)
-			JieGua(uint(YiGong), uint(ErGong), uint(SanGong),uint(ri))
+			JieGua(uint(YiGong), uint(ErGong), uint(SanGong),uint(ri),uint(yue))
 		}
 		if shi <= 6 {
 			ErGong := YiGong + ri - 7
-			fmt.Println("ri>6 =",ri)
+			//fmt.Println("ri>6 =",ri)
 			SanGong := ErGong + shi - 1
 			//fmt.Println("sangong >6(shi<=6) =", SanGong)
-			JieGua(uint(YiGong), uint(ErGong), uint(SanGong),uint(ri))
+			JieGua(uint(YiGong), uint(ErGong), uint(SanGong),uint(ri),uint(yue))
 		}
 	}else if ri <= 6 {
 			var ErGong = YiGong + ri - 1
 			var SanGong = ErGong + shi - 1
-			fmt.Println("ri<6: =", ri)
+			//fmt.Println("ri<6: =", ri)
 			//fmt.Println("sangong<=6: =", SanGong)
-			JieGua(uint(YiGong), uint(ErGong), uint(SanGong),uint(ri))
+			JieGua(uint(YiGong), uint(ErGong), uint(SanGong),uint(ri),uint(yue))
 	}
 
 }
 
 //解卦
-func JieGua(yg uint,eg uint,sg uint,ri uint)  {
+func JieGua(yg uint,eg uint,sg uint,ri uint,yue uint) {
 
 	GongWei:= [8]uint{1,7,13,19,25,31,37,43}
-	//一宫
-	if (yg==GongWei[0] || yg== GongWei[1] || yg== GongWei[2]	|| yg== GongWei[3]|| yg== GongWei[4] || yg== GongWei[5] || yg== GongWei[6])	{
+	//一宫 月落宫
+	if (yg==GongWei[0] || yg== GongWei[1] || yg== GongWei[2] || yg== GongWei[3]|| yg== GongWei[4] || yg== GongWei[5] || yg== GongWei[6])	{
 		fmt.Println("一宫:大安")
+		yi_gong <- "大安"
+		defer close(yi_gong)
 	}
-	if (yg==GongWei[0]+1 || yg== GongWei[1]+1 || yg== GongWei[2]+1	|| yg== GongWei[3]+1|| yg== GongWei[4]+1 || yg== GongWei[5]+1 || yg== GongWei[6]+1)	{
+	if (yg==GongWei[0]+1 || yg== GongWei[1]+1 || yg== GongWei[2]+1 || yg== GongWei[3]+1|| yg== GongWei[4]+1 || yg== GongWei[5]+1 || yg== GongWei[6]+1)	{
 		fmt.Println("一宫:留连")
+		yi_gong <- "留连"
+		defer close(yi_gong)
 	}
-	if (yg==GongWei[0]+2 || yg== GongWei[1]+2 || yg== GongWei[2]+2	|| yg== GongWei[3]+2|| yg== GongWei[4]+2 || yg== GongWei[5]+2 || yg== GongWei[6]+2)	{
+	if (yg==GongWei[0]+2 || yg== GongWei[1]+2 || yg== GongWei[2]+2 || yg== GongWei[3]+2|| yg== GongWei[4]+2 || yg== GongWei[5]+2 || yg== GongWei[6]+2)	{
 		fmt.Println("一宫:速喜")
+		yi_gong <- "速喜"
+		defer close(yi_gong)
 	}
-	if (yg==GongWei[0]+3 || yg== GongWei[1]+3 || yg== GongWei[2]+3	|| yg== GongWei[3]+3|| yg== GongWei[4]+3 || yg== GongWei[5]+3 || yg== GongWei[6]+2)	{
+	if (yg==GongWei[0]+3 || yg== GongWei[1]+3 || yg== GongWei[2]+3 || yg== GongWei[3]+3|| yg== GongWei[4]+3 || yg== GongWei[5]+3 || yg== GongWei[6]+2)	{
 		fmt.Println("一宫:赤口")
+		yi_gong <- "赤口"
+		defer close(yi_gong)
 	}
-	if (yg==GongWei[0]+4 || yg== GongWei[1]+4 || yg== GongWei[2]+4	|| yg== GongWei[3]+4|| yg== GongWei[4]+4 || yg== GongWei[5]+4 || yg== GongWei[6]+2)	{
+	if (yg==GongWei[0]+4 || yg== GongWei[1]+4 || yg== GongWei[2]+4 || yg== GongWei[3]+4|| yg== GongWei[4]+4 || yg== GongWei[5]+4 || yg== GongWei[6]+2)	{
 		fmt.Println("一宫:小吉")
+		yi_gong <- "小吉"
+		defer close(yi_gong)
 	}
 	if (yg==0 || yg==GongWei[0]+5 || yg== GongWei[1]+5 || yg== GongWei[2]+5	|| yg== GongWei[3]+5|| yg== GongWei[4]+5 || yg== GongWei[5]+5 || yg== GongWei[6]+2)	{
 		fmt.Println("一宫:空亡")
+		yi_gong <- "空亡"
+		defer close(yi_gong)
 	}
+
 
 	//二宫 以日轮
 	if (eg ==GongWei[0] || eg == GongWei[1] || eg == GongWei[2]	|| eg == GongWei[3]|| eg == GongWei[4] || eg == GongWei[5] || eg == GongWei[6])	{
 		fmt.Println("二宫:大安")
+		er_gong <- "大安"
+		defer close(er_gong)
 	}
-	if (eg ==GongWei[0]+1 || eg == GongWei[1]+1 || eg == GongWei[2]+1	|| eg == GongWei[3]+1|| eg == GongWei[4]+1 || eg == GongWei[5]+1 || eg == GongWei[6]+1)	{
+	if (eg ==GongWei[0]+1 || eg == GongWei[1]+1 || eg == GongWei[2]+1	|| eg == GongWei[3]+1|| eg == GongWei[4]+1 || eg == GongWei[5]+1 || eg == GongWei[6]+1) {
 		fmt.Println("二宫:留连")
+		er_gong <- "留连"
+		defer close(er_gong)
 	}
 	if (eg ==GongWei[0]+2 || eg == GongWei[1]+2 || eg == GongWei[2]+2	|| eg == GongWei[3]+2|| eg == GongWei[4]+2 || eg == GongWei[5]+2 || eg == GongWei[6]+2)	{
 		fmt.Println("二宫:速喜")
+		er_gong <- "速喜"
+		defer close(er_gong)
 	}
 	if (eg ==GongWei[0]+3 || eg == GongWei[1]+3 || eg == GongWei[2]+3	|| eg == GongWei[3]+3|| eg == GongWei[4]+3 || eg == GongWei[5]+3 || eg == GongWei[6]+2)	{
 		fmt.Println("二宫:赤口")
+		er_gong <- "赤口"
+		defer close(er_gong)
 	}
 	if (eg ==GongWei[0]+4 || eg == GongWei[1]+4 || eg == GongWei[2]+4	|| eg == GongWei[3]+4|| eg == GongWei[4]+4 || eg == GongWei[5]+4 || eg == GongWei[6]+2)	{
 		fmt.Println("二宫:小吉")
+		er_gong <- "小吉"
+		defer close(er_gong)
 	}
 	if (eg ==0 || eg ==GongWei[0]+5 || eg == GongWei[1]+5 || eg == GongWei[2]+5	|| eg == GongWei[3]+5|| eg == GongWei[4]+5 || eg == GongWei[5]+5 || eg == GongWei[6]+2)	{
 		fmt.Println("二宫:空亡")
+		er_gong <- "空亡"
+		defer close(er_gong)
 	}
 
 	//三宫
 	if (sg ==GongWei[0] || sg == GongWei[1] || sg == GongWei[2]	|| sg == GongWei[3]|| sg == GongWei[4] || sg == GongWei[5] || sg== GongWei[6])	{
 		fmt.Println("三宫:大安")
+		san_gong <- "大安"
+		defer close(san_gong)
 	}
 	if (sg==GongWei[0]+1 || sg== GongWei[1]+1 || sg== GongWei[2]+1	|| sg== GongWei[3]+1|| sg== GongWei[4]+1 || sg== GongWei[5]+1 || sg== GongWei[6]+1)	{
 		fmt.Println("三宫:留连")
+		san_gong <- "留连"
+		defer close(san_gong)
 	}
 	if (sg==GongWei[0]+2 || sg== GongWei[1]+2 || sg== GongWei[2]+2	|| sg== GongWei[3]+2|| sg== GongWei[4]+2 || sg== GongWei[5]+2 || sg== GongWei[6]+2)	{
 		fmt.Println("三宫:速喜")
+		san_gong <- "速喜"
+		defer close(san_gong)
 	}
 	if (sg==GongWei[0]+3 || sg== GongWei[1]+3 || sg== GongWei[2]+3	|| sg== GongWei[3]+3|| sg== GongWei[4]+3 || sg== GongWei[5]+3 || sg== GongWei[6]+2)	{
 		fmt.Println("三宫:赤口")
+		san_gong <- "赤口"
+		defer close(san_gong)
 	}
 	if (sg==GongWei[0]+4 || sg== GongWei[1]+4 || sg== GongWei[2]+4	|| sg== GongWei[3]+4|| sg== GongWei[4]+4 || sg== GongWei[5]+4 || sg== GongWei[6]+2)	{
 		fmt.Println("三宫:小吉")
+		san_gong <- "小吉"
+		defer close(san_gong)
 	}
 	if (sg ==0 || sg == GongWei[7]+3 || sg==GongWei[0]+5 || sg== GongWei[1]+5 || sg== GongWei[2]+5	|| sg== GongWei[3]+5|| sg== GongWei[4]+5 || sg== GongWei[5]+5 || sg== GongWei[6]+2)	{
 		fmt.Println("三宫:空亡")
+		san_gong <- "空亡"
+		defer close(san_gong)
 	}
-	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-	YiDaoZhan(yg, eg,sg,ri )
-	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
-	XiaoTouXuan(yg,eg,sg)
+	//Jkd(yg,eg,sg) //金口定
+	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+	SanCunJin(yg,yue,eg) //三寸金
+	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+	XiaoTouXuan(yg,eg,sg) //小透玄
+	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
+	YiDaoZhan(yg, eg,sg,ri ) //一刀斩
+	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 }
