@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-	"time"
+	_ "time"
 )
 
 //童男童女
@@ -78,14 +78,16 @@ func TongZiMing(sg uint) {
 	}
 }
 
-func About() {
-	time.Sleep(time.Second * 9)
-	fmt.Println("					六壬通神暄未然\n" +
-		"					因缘造化系自身\n" +
-		"					阴阳共判劝君明\n" +
+/*
+func About()  {
+	time.Sleep(time.Second*9)
+	fmt.Println("					六壬通神暄未然\n"+
+		"					因缘造化系自身\n"+
+		"					阴阳共判劝君明\n"+
 		"					虚实明辨壬中求\n")
 	fmt.Println("						/by liangzi")
 	fmt.Println("						mail: bGlhbmd6aTEyMTZAb3V0bG9vay5jb20K")
 	fmt.Println("::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::")
 
 }
+*/
