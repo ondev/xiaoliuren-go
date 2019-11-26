@@ -1,3 +1,4 @@
+//　六神特性 参考了邵一尘的博客内容
 package public
 
 import "fmt"
