@@ -8,4 +8,5 @@
 月日时　每输入一个按一下回车总共三次回车
 build.sh　构建脚本
 
+![](https://github.com/Aquarian-Age/xiaoliuren-go/blob/master/DSC03813.JPG)
 
