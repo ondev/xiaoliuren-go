@@ -5,8 +5,9 @@ import (
 	"mingfajuan/qike"
 )
 
-func main() {
+func main()  {
 	qike.QiKe()
-	public.Choise() //后期的公共选择部分
+	public.Choise()
 	qike.About()
 }
+
